@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feliz Dia das Mães</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins :wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0d0d0d;
+      color: #ffffff;
+      font-family: 'Cursive', 'Brush Script MT', cursive, sans-serif;
+    }
+
+    .page {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      transition: opacity 0.8s ease-in-out;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .page h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      color: #ff69b4;
+    }
+
+    .page p {
+      font-size: 2em;
+      margin-bottom: 30px;
+    }
+
+    button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.5em;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.5);
+      z-index: 1000;
+    }
+
+    .emoji-explosion {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 40px;
+      z-index: 999;
+      opacity: 0;
+      transition: opacity 1s ease-out;
+    }
+
+    .photos {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .card {
+      width: 200px;
+      height: 200px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front,
+    .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      border: 3px solid #ff69b4;
+    }
+
+    .card-front {
+      background-size: cover;
+      background-position: center;
+    }
+
+    .card-back {
+      background-color: #1e1e1e;
+      color: #fffacd;
+      transform: rotateY(180deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.9em;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .container {
+      text-align: center;
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1#main {
+      font-size: 3em;
+      margin-bottom: 20px;
+      color: #ff69b4;
+      font-family: 'Cursive', 'Brush Script MT', cursive;
+    }
+
+    p#texto {
+      font-size: 1.5em;
+      line-height: 1.8em;
+      max-width: 800px;
+      margin: auto;
+      color: #fffacd;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .signature {
+      margin-top: 50px;
+      font-size: 1.2em;
+    }
+
+    .signature span {
+      font-family: 'Pacifico', cursive;
+      font-style: italic;
+      color: #ffb6c1;
+    }
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .heart {
+      position: absolute;
+      top: -50px;
+      font-size: 24px;
+      animation: fall linear infinite;
+      color: #ff69b4;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+
+    #youtube-player {
+      position: absolute;
+      top: -100px;
+      left: -100px;
+      width: 1px;
+      height: 1px;
+      visibility: hidden;
+    }
+  </style>
+</head>
+<body>
+
+<!-- 🎬 Tela Inicial -->
+<div class="page" id="page1">
+  <h1>Olá meu amor ❤️💙</h1>
+  <p>Clique abaixo para começar essa pequena surpresa...</p>
+  <p style="font-size: 30px;">👇</p>
+  <button onclick="startExperience()">▶️ Clique aqui para começar</button>
+</div>
+
+<!-- 🌈 Explosão de Emojis -->
+<div class="emoji-explosion" id="explosion">💖🎉🌸✨🥰</div>
+
+<!-- 🎵 Player do YouTube invisível -->
+<iframe id="youtube-player" frameborder="0" allowfullscreen></iframe>
+
+<!-- 📄 Conteúdo Principal -->
+<div class="page hidden" id="page2">
+  <div class="container">
+    <h1 id="main">Feliz Dia das Mães</h1>
+
+    <!-- Fotos interativas -->
+    <div class="photos">
+      <div class="card" onclick="this.classList.toggle('flipped')">
+        <div class="card-inner">
+          <div class="card-front" style="background-image: url('https://i.imgur.com/t6b07FK.jpeg ');"></div>
+          <div class="card-back">
+            Nesse dia que nós descobrimos uma fração da fofura do nosso pequenino, e descobri também que tanto ele quanto você são as pessoas mais lindas desse mundo :) 💓
+          </div>
+        </div>
+      </div>
+
+      <div class="card" onclick="this.classList.toggle('flipped')">
+        <div class="card-inner">
+          <div class="card-front" style="background-image: url('https://i.imgur.com/A59REvQ.jpeg ');"></div>
+          <div class="card-back">
+            Já nessa foto a parte especial é você. Você é incrível meu bem, você é tudo para mim, a pessoa mais importante da minha vida. Eu te amo muito, minha princesa 💓💓💓
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Texto emocionado -->
+    <p id="texto">
+      Minha querida Fabyola, hoje é o seu dia e quero aproveitar cada segundo para te dizer o quanto você é especial pra mim. Você não é só uma esposa incrível, companheira, amor da minha vida... você está se tornando uma mãe maravilhosa. Cada gesto seu, carinho, olhar já mostra o amor imenso que existe no seu coração. E não tenho dúvida que será uma mãe incrível para o nosso Bernardo.
+      <br><br>
+      Obrigado por tudo, por estar sempre ao meu lado, por ser paciente, amorosa e dedicada. Eu te amo mais do que qualquer palavra poderia descrever. Você é a realização dos meus sonhos e sei que nosso pequenino será abençoado por ter você como mãe. Feliz Dia das Mães, meu amor!
+    </p>
+
+    <!-- Assinatura -->
+    <div class="signature">
+      De: <span>André Luis</span><br/>
+      Para: <span>Fabyola Evilin</span>
+    </div>
+  </div>
+
+  <!-- Corações caírem -->
+  <div class="hearts" id="hearts"></div>
+</div>
+
+<script>
+  const VIDEO_ID = 'kPa7bsKwL-c'; // ID DO VÍDEO DO YOUTUBE
+
+  function startExperience() {
+    const page1 = document.getElementById("page1");
+    const page2 = document.getElementById("page2");
+    const explosion = document.getElementById("explosion");
+
+    explosion.style.opacity = 1;
+
+    setTimeout(() => {
+      page1.classList.add("hidden");
+      page2.classList.remove("hidden");
+      explosion.style.display = "none";
+      loadAndPlayYouTubeVideo();
+      createHearts();
+    }, 1000);
+  }
+
+  function loadAndPlayYouTubeVideo() {
+    const player = document.getElementById("youtube-player");
+    player.src = `https://www.youtube.com/embed/ ${VIDEO_ID}?enablejsapi=1&autoplay=1&loop=1&playlist=${VIDEO_ID}`;
+  }
+
+  function createHearts() {
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.textContent = '❤';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.animationDuration = (4 + Math.random() * 4) + 's';
+      heart.style.fontSize = (16 + Math.random() * 24) + 'px';
+      document.getElementById('hearts').appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 8000);
+    }, 300);
+  }
+</script>
+
+</body>
+</html>
